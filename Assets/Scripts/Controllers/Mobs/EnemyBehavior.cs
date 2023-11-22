@@ -9,7 +9,7 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private float _delay;
 
     private Animator _skeletonAnimator;
-    private AudioSource _skeletonVoice;
+    private AudioSource _skeletonAudio;
 
     private void OnValidate()
     {
@@ -22,14 +22,14 @@ public class EnemyBehavior : MonoBehaviour
     private void Awake()
     {
         _skeletonAnimator = GetComponent<Animator>();
-        _skeletonVoice = GetComponent<AudioSource>();
+        _skeletonAudio = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
         int walkingSoundsDelay = 1;
 
-        _skeletonVoice.PlayDelayed(walkingSoundsDelay);
+        _skeletonAudio.PlayDelayed(walkingSoundsDelay);
         StartCoroutine(WaitBeforeDeath(_delay));
     }
 
@@ -39,9 +39,9 @@ public class EnemyBehavior : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
 
-        _skeletonVoice.Stop();
+        _skeletonAudio.Stop();
         _skeletonAnimator.SetTrigger(SkeletonAnimatorData.Params.Death);
-        _skeletonVoice.PlayOneShot(_skeletonDeathSounds[Random.Range(0, _skeletonDeathSounds.Length)]);
+        _skeletonAudio.PlayOneShot(_skeletonDeathSounds[Random.Range(0, _skeletonDeathSounds.Length)]);
         
         Destroy(this);
         Destroy(_skeletonAnimator, deleteAnimatorDelay);
