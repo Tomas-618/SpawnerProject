@@ -6,7 +6,7 @@ public class SpawnerBehavior : MonoBehaviour
 {
     [SerializeField] private UnityEvent _spawned;
 
-    [SerializeField] private EnemyBehavior _enemy;
+    [SerializeField] private Skeleton _enemy;
 
     [SerializeField] private int _spawnCount;
     [SerializeField] private float _delay;
@@ -43,7 +43,7 @@ public class SpawnerBehavior : MonoBehaviour
             Vector3 position = _points[Random.Range(0, _points.Length)].transform.position;
             Vector3 direction = Vector3.up * Random.Range(0, maxAngle);
 
-            EnemyBehavior enemy = Instantiate(_enemy, position, Quaternion.identity);
+            Skeleton enemy = Instantiate(_enemy, position, Quaternion.identity);
 
             enemy.transform.rotation = Quaternion.Euler(direction);
             _spawned.Invoke();

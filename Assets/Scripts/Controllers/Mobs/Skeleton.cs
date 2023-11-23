@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator), typeof(AudioSource))]
-public class EnemyBehavior : MonoBehaviour
+public class Skeleton : MonoBehaviour
 {
     [SerializeField] private AudioClip[] _skeletonDeathSounds;
 
@@ -35,9 +35,11 @@ public class EnemyBehavior : MonoBehaviour
 
     private IEnumerator WaitBeforeDeath(float delay)
     {
+        WaitForSeconds wait = new WaitForSeconds(delay);
+
         int deleteAnimatorDelay = 5;
 
-        yield return new WaitForSeconds(delay);
+        yield return wait;
 
         _skeletonAudio.Stop();
         _skeletonAnimator.SetTrigger(SkeletonAnimatorData.Params.Death);
